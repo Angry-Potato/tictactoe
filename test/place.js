@@ -15,6 +15,9 @@ suite("Place", function() {
 		test("should have a value", function() {
 			subject.should.have.property('value', " ");
 		});
+		test("should consider itself empty", function() {
+			subject.isEmpty().should.eql(true);
+		});
 	});
 	suite("After construction", function() {
 		var subject = null;
@@ -33,6 +36,9 @@ suite("Place", function() {
 		test("should be able to change value", function() {
 			subject.setValue("elephant");
 			subject.should.have.property('value', "elephant");
+		});
+		test("should consider itself not empty", function() {
+			subject.isEmpty().should.eql(false);
 		});
 	});
 });

@@ -28,6 +28,11 @@ Place.prototype.setValue = function(value) {
 	this.value = value;
 };
 
+//returns true if current value is an empty space
+Place.prototype.isEmpty = function() {
+	return this.value === " ";
+};
+
 
 // export the class
 module.exports = Place;
