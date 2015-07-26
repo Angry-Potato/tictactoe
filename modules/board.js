@@ -49,5 +49,9 @@ Board.prototype.getFreePlaces = function() {
 	}
 	return freePlaces;
 };
+
+Board.prototype.draw = function() {
+
+};
 // export the class
 module.exports = Board;

@@ -13,8 +13,10 @@ function TicTacToe() {
 
 //plays the game
 TicTacToe.prototype.play = function() {
+	this.drawBoard();
 	while (this.board.hasFreePlaces()) {
 		this.makeNextMove();
+		this.drawBoard();
 		this.incrementTurn();
 	}
 };
@@ -36,6 +38,9 @@ TicTacToe.prototype.getPlayerForThisTurn = function() {
 	}
 };
 
+TicTacToe.prototype.drawBoard = function() {
+	this.board.draw();
+};
 
 
 // export the class

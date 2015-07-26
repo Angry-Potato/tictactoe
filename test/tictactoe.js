@@ -52,13 +52,20 @@ suite("TicTacToe: ", function() {
 			player2TakeTurnSpy.called.should.eql(true);
 		});
 		test("should give the players the free spaces to choose from on their turn", function() {
-			var player1TakeTurnSpy = sinon.stub(subject.players[0], 'takeTurn');
-			var player2TakeTurnSpy = sinon.stub(subject.players[1], 'takeTurn');
+			var player1TakeTurnStub = sinon.stub(subject.players[0], 'takeTurn');
+			var player2TakeTurnStub = sinon.stub(subject.players[1], 'takeTurn');
 
 			subject.play();
 
-			player1TakeTurnSpy.calledWith(subject.board.getFreePlaces()).should.eql(true);
-			player2TakeTurnSpy.calledWith(subject.board.getFreePlaces()).should.eql(true);
+			player1TakeTurnStub.calledWith(subject.board.getFreePlaces()).should.eql(true);
+			player2TakeTurnStub.calledWith(subject.board.getFreePlaces()).should.eql(true);
+		});
+		test("should draw the board at the start of the game and after each turn", function() {
+			var boardDrawStub = sinon.stub(subject.board, 'draw');
+
+			subject.play();
+
+			boardDrawStub.callCount.should.eql(3);
 		});
 	});
 });
