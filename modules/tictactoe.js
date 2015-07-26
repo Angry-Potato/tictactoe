@@ -11,6 +11,14 @@ function TicTacToe() {
 	this.turn = 0;
 }
 
+//plays the game
+TicTacToe.prototype.play = function() {
+	while (this.board.hasFreePlaces()) {
+		this.incrementTurn();
+	}
+};
+
+
 TicTacToe.prototype.incrementTurn = function() {
 	this.turn++;
 };

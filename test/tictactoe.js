@@ -1,4 +1,5 @@
-var TicTacToe = require("../modules/tictactoe.js");
+var TicTacToe = require("../modules/tictactoe.js"),
+	sinon = require('sinon');
 
 suite("TicTacToe: ", function() {
 	suite("Initial default state", function() {
@@ -25,6 +26,27 @@ suite("TicTacToe: ", function() {
 			subject.should.have.property('turn', 0);
 			subject.incrementTurn();
 			subject.should.have.property('turn', 1);
+		});
+	});
+	suite("During game play", function() {
+		var subject = null;
+		setup(function() {
+			subject = new TicTacToe();
+		});
+		test("should be able to increment the turn", function() {
+			subject.should.have.property('turn', 0);
+			subject.incrementTurn();
+			subject.should.have.property('turn', 1);
+		});
+		test("should play untill the board has no free places", function() {
+			var hasFreePlacesStub = sinon.stub(subject.board, 'hasFreePlaces');
+			hasFreePlacesStub.onCall(0).returns(true);
+			hasFreePlacesStub.onCall(1).returns(true);
+			hasFreePlacesStub.onCall(2).returns(false);
+
+			subject.should.have.property('turn', 0);
+			subject.play();
+			subject.should.have.property('turn', 2);
 		});
 	});
 });
