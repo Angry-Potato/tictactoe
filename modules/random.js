@@ -5,7 +5,7 @@
 function Random() {
 }
 
-//returns a random integer within the specified range (high-end is inclusive)
+//returns a random integer within the specified range (low-end is inclusive, high-end is exclusive)
 Random.prototype.randomInt = function(low, high) {
 	return Math.floor(Math.random() * (high - low) + low);
 };
