@@ -15,7 +15,7 @@
   "scripts": {
     "lint": "./node_modules/.bin/jshint . --reporter=./node_modules/jshint/src/reporters/default.js",
     "pretest": "npm run-script lint",
-    "test": "./node_modules/.bin/istanbul cover ./node_modules/mocha/bin/_mocha -- --recursive -R spec -r should -u tdd",
+    "test": "./node_modules/.bin/istanbul cover ./node_modules/mocha/bin/_mocha -- --recursive -R nyan -r should -u tdd",
     "posttest": "./node_modules/.bin/istanbul check-coverage"
   },
   "main": "modules/main.js",
