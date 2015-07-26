@@ -1,6 +1,6 @@
 var Place = require("../modules/place.js");
 
-suite("Place", function() {
+suite("Place: ", function() {
 	suite("Initial default state", function() {
 		var subject = null;
 		setup(function() {

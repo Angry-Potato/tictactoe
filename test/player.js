@@ -1,6 +1,6 @@
 var Player = require("../modules/player.js");
 
-suite("Player", function() {
+suite("Player: ", function() {
 	suite("Initial default state", function() {
 		var subject = null;
 		setup(function() {

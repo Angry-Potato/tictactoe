@@ -22,5 +22,32 @@ Board.prototype.getEmptyBoard = function() {
 	return places;
 };
 
+/*
+	Decided to create two separate functions for hasFreePlaces and getFreePlaces instead of simply
+	relying on the array count returned by getFreePlaces because although they are similar, 
+	hasFreePlaces has the chance of returning on the first loop whereas getFreePlaces should
+	always check all the places on the board.
+	Keeping these separate should lead to quicker board checks later on.
+*/
+//true if there are any places still free on the board
+Board.prototype.hasFreePlaces = function() {
+	for (var i = 0; i < this.places.length; i++) {
+		if (this.places[i].isEmpty()) {
+			return true;
+		}
+	}
+	return false;
+};
+
+//get all free places left on the board
+Board.prototype.getFreePlaces = function() {
+	var freePlaces = [];
+	for (var i = 0; i < this.places.length; i++) {
+		if (this.places[i].isEmpty()) {
+			freePlaces.push(this.places[i]);
+		}
+	}
+	return freePlaces;
+};
 // export the class
 module.exports = Board;

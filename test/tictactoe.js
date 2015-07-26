@@ -1,6 +1,6 @@
 var TicTacToe = require("../modules/tictactoe.js");
 
-suite("TicTacToe", function() {
+suite("TicTacToe: ", function() {
 	suite("Initial default state", function() {
 		var subject = null;
 		setup(function() {
