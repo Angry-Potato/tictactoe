@@ -1,5 +1,10 @@
-
-function Place() {
+/*
+ * Place class
+ * Represents a place on a game board
+ */
+function Place(x, y) {
+	this.x = x;
+	this.y = y;
 }
 
 
