@@ -1,14 +1,16 @@
-var Place = require('./place.js');
+var Place = require('./place.js'),
+	BoardConsoleView = require("./board_console_view.js");
 
 /*
  * Board class
  * Maintains an array representing all places on a game board.
  */
-function Board(width, height) {
+function Board(width, height, view) {
 	// initialise empty board
 	this.width = width ? width : 3;
 	this.height = height ? height : 3;
 	this.places = this.getEmptyBoard();
+	this.view = view ? view : new BoardConsoleView();
 }
 
 //gets an array of empty pieces according to the height and width of the board
@@ -51,7 +53,7 @@ Board.prototype.getFreePlaces = function() {
 };
 
 Board.prototype.draw = function() {
-
+	this.view.render(this.places);
 };
 // export the class
 module.exports = Board;
