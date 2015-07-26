@@ -12,5 +12,19 @@ suite("TicTacToe: ", function() {
 		test("should have a board", function() {
 			subject.should.have.property('board');
 		});
+		test("should have a turn counter", function() {
+			subject.should.have.property('turn', 0);
+		});
+	});
+	suite("After construction", function() {
+		var subject = null;
+		setup(function() {
+			subject = new TicTacToe();
+		});
+		test("should be able to increment the turn", function() {
+			subject.should.have.property('turn', 0);
+			subject.incrementTurn();
+			subject.should.have.property('turn', 1);
+		});
 	});
 });

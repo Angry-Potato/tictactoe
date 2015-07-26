@@ -8,7 +8,14 @@ var Player = require('./player.js');
 function TicTacToe() {
 	this.players = [new Player("x"), new Player("o")];
 	this.board = new Board(3, 3);
+	this.turn = 0;
 }
+
+TicTacToe.prototype.incrementTurn = function() {
+	this.turn++;
+};
+
+
 
 // export the class
 module.exports = TicTacToe;
