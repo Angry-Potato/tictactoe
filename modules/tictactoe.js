@@ -24,14 +24,17 @@ TicTacToe.prototype.incrementTurn = function() {
 };
 
 TicTacToe.prototype.makeNextMove = function() {
-	if (this.turn % 2 === 0) {
-		this.players[0].takeTurn();
-	}
-	else {
-		this.players[1].takeTurn();
-	}
+	this.getPlayerForThisTurn().takeTurn(this.board.getFreePlaces());
 };
 
+TicTacToe.prototype.getPlayerForThisTurn = function() {
+	if (this.turn % 2 === 0) {
+		return this.players[0];
+	}
+	else {
+		return this.players[1];
+	}
+};
 
 
 
