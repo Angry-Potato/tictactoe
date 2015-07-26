@@ -10,4 +10,13 @@ suite("Player", function() {
 			subject.should.have.property('pieceType', undefined);
 		});
 	});
+	suite("After construction", function() {
+		var subject = null;
+		setup(function() {
+			subject = new Player("codpiece");
+		});
+		test("should have the set pieceType", function() {
+			subject.should.have.property('pieceType', "codpiece");
+		});
+	});
 });
