@@ -1,0 +1,29 @@
+{
+  "name": "tddtictactoe",
+  "version": "0.0.1",
+  "description": "A game of tic-tac-toe being played by two machines making random moves, written using TDD.",
+  "author": "Liam Humphreys <liam.humphreys.zim@gmail.com>",
+  "contributors": [{
+  "name": "Liam Humphreys",
+  "email": "liam.humphreys.zim@gmail.com"
+}],
+  "bin": {
+  "tictactoe": "./modules/tictactoe.js"
+},
+"scripts": {
+  "lint": "./node_modules/.bin/jshint . --reporter=./node_modules/jshint-full-path/index.js",
+  "pretest": "npm run-script lint",
+  "test": "./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha -- --recursive -R spec -r should",
+  "posttest": "./node_modules/.bin/istanbul check-coverage && rm -rf coverage"
+},
+  "main": "modules/main.js",
+  "repository": {
+  "type": "git",
+  "url": "https://github.com/Angry-Potato/tictactoe.git"
+},
+  "dependencies": {
+    "jshint": "2.5.6",
+    "istanbul": "0.3.2",
+    "mocha": "1.21.5"
+  }
+}
