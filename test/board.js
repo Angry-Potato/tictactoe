@@ -6,7 +6,7 @@ suite("Board", function() {
 		setup(function() {
 			subject = new Board();
 		});
-		it("should have places", function() {
+		test("should have places", function() {
 			subject.should.have.property('places');
 		});
 	});
