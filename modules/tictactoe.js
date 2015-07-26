@@ -18,10 +18,10 @@ TicTacToe.prototype.play = function() {
 	}
 };
 
-
 TicTacToe.prototype.incrementTurn = function() {
 	this.turn++;
 };
+
 
 
 

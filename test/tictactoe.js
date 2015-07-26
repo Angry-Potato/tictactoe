@@ -48,5 +48,19 @@ suite("TicTacToe: ", function() {
 			subject.play();
 			subject.should.have.property('turn', 2);
 		});
+		test("should ask the players to take turns", function() {
+			var hasFreePlacesStub = sinon.stub(subject.board, 'hasFreePlaces');
+			hasFreePlacesStub.onCall(0).returns(true);
+			hasFreePlacesStub.onCall(1).returns(true);
+			hasFreePlacesStub.onCall(2).returns(false);
+
+			var player1TakeTurnSpy = sinon.spy(subject.players[0], 'takeTurn');
+			var player2TakeTurnSpy = sinon.spy(subject.players[1], 'takeTurn');
+
+			subject.play();
+
+			player1TakeTurnSpy.called.should.eql(true);
+			player2TakeTurnSpy.called.should.eql(true);
+		});
 	});
 });
