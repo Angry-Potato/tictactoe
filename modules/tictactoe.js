@@ -6,7 +6,7 @@ var Player = require('./player.js');
  * Runs a game of tictactoe between two machine players
  */
 function TicTacToe() {
-	this.players = [new Player("x"), new Player("o")];
+	this.players = [new Player("x", "glad0s"), new Player("o", "T-800")];
 	this.board = new Board(3, 3);
 	this.turn = 0;
 }

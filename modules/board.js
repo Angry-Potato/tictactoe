@@ -13,6 +13,16 @@ function Board(width, height, view) {
 	this.view = view ? view : new BoardConsoleView();
 }
 
+//gets width coordinate of the board
+Board.prototype.getWidth = function() {
+	return this.width;
+};
+
+//gets height coordinate of the board
+Board.prototype.getHeight = function() {
+	return this.height;
+};
+
 //gets an array of empty pieces according to the height and width of the board
 Board.prototype.getEmptyBoard = function() {
 	var places = [];

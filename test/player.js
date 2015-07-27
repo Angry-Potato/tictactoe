@@ -15,6 +15,10 @@ suite("Player: ", function() {
 			subject.should.have.property('pieceType', undefined);
 		});
 
+		test("should have an undefined name", function() {
+			subject.should.have.property('name', undefined);
+		});
+
 		test("should have a random utility", function() {
 			subject.should.have.property('random');
 		});
@@ -24,7 +28,7 @@ suite("Player: ", function() {
 		var subject = null;
 
 		setup(function() {
-			subject = new Player("codpiece");
+			subject = new Player("codpiece", "Crazy Jack");
 		});
 
 		test("should have the set pieceType", function() {
@@ -33,6 +37,10 @@ suite("Player: ", function() {
 
 		test("should have a random utility", function() {
 			subject.should.have.property('random');
+		});
+
+		test("should have the set name", function() {
+			subject.should.have.property('name', "Crazy Jack");
 		});
 	});
 
@@ -64,7 +72,7 @@ suite("Player: ", function() {
 		test("should set its piece type as the value on a random place during its turn", function() {
 			var randomIntStub = sinon.stub(subject.random, 'randomInt');
 			randomIntStub.onCall(0).returns(1);
-			
+
 			var freePlaces = [new Place(1,2," "),new Place(2,2," ")];
 			subject.takeTurn(freePlaces);
 

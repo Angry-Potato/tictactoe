@@ -1,4 +1,6 @@
 var TicTacToeConsoleView = require("../modules/tictactoe_console_view.js"),
+	Player = require("../modules/player.js"),
+	Board = require("../modules/board.js"),
 	sinon = require('sinon');
 
 suite("TicTacToeConsoleView: ", function() {
@@ -29,7 +31,7 @@ suite("TicTacToeConsoleView: ", function() {
 		});
 		
 		test("should output welcome message to console", function() {
-			subject.welcome();
+			subject.welcome([new Player("x", "Player 1"), new Player("o", "Player 2")],new Board(3, 3));
 
 			consoleLogStub.getCall(0).args[0].should.eql("Welcome to a vicious match of Tic-Tac-Toe to the death!");
 			consoleLogStub.getCall(1).args[0].should.eql("In the eccentric \"x\" corner, we have Player 1");
