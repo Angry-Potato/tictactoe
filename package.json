@@ -10,7 +10,7 @@
     }
   ],
   "bin": {
-    "tictactoe": "./modules/tictactoe.js"
+    "tictactoe": "./modules/main.js"
   },
   "scripts": {
     "lint": "./node_modules/.bin/jshint . --reporter=./node_modules/jshint/src/reporters/default.js",
