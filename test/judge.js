@@ -24,8 +24,8 @@ suite("Judge: ", function() {
 
 		test("should find no winner in a given array of empty board places", function() {
 			var places = [];
-			for (var y = 0; y < 6; y++) {
-				for (var x = 0; x < 6; x++) {
+			for (var y = 0; y < 3; y++) {
+				for (var x = 0; x < 3; x++) {
 					places.push(new Place(x, y, " "));
 				}
 			}
@@ -34,24 +34,17 @@ suite("Judge: ", function() {
 		});
 
 		test("should find no winner in a fully populated array of mixed board places", function() {
-			var places = [];
-			var isX = true;
-			for (var y = 0; y < 6; y++) {
-				for (var x = 0; x < 6; x++) {
-					places.push(isX ? new Place(x, y, "x") : new Place(x, y, "o"));
-					isX = !isX;
-				}
-				isX = !isX;
-			}
+			var places = [new Place(0, 0, "x"), new Place(1, 0, "x"), new Place(2, 0, "o"), new Place(0, 1, "o"), new Place(1, 1, "o"), new Place(2, 1, "x"), new Place(0, 2, "x"), new Place(1, 2, "o"), new Place(2, 2, "o")];
+
 			subject.findWinner(places).should.eql(false);
 			subject.should.have.property('winner', undefined);
 		});
 
 		test("should find a vertical line winner in a given array of board places", function() {
 			var places = [];
-			for (var y = 0; y < 6; y++) {
-				for (var x = 0; x < 6; x++) {
-					places.push(x === 2 ? new Place(x, y, " ") : new Place(x, y, "x"));
+			for (var y = 0; y < 3; y++) {
+				for (var x = 0; x < 3; x++) {
+					places.push(x === 2 ? new Place(x, y, "x") : new Place(x, y, " "));
 				}
 			}
 			subject.findWinner(places).should.eql(true);
@@ -60,8 +53,8 @@ suite("Judge: ", function() {
 
 		test("should find a horizontal line winner in a given array of board places", function() {
 			var places = [];
-			for (var y = 0; y < 6; y++) {
-				for (var x = 0; x < 6; x++) {
+			for (var y = 0; y < 3; y++) {
+				for (var x = 0; x < 3; x++) {
 					places.push(y === 2 ? new Place(x, y, " ") : new Place(x, y, "o"));
 				}
 			}
@@ -71,13 +64,13 @@ suite("Judge: ", function() {
 
 		test("should find a diagonal line winner in a given array of board places", function() {
 			var places = [];
-			for (var y = 0; y < 6; y++) {
-				for (var x = 0; x < 6; x++) {
-					places.push(x === y ? new Place(x, y, " ") : new Place(x, y, "z"));
+			for (var y = 0; y < 3; y++) {
+				for (var x = 0; x < 3; x++) {
+					places.push(x === y ? new Place(x, y, "o") : new Place(x, y, " "));
 				}
 			}
 			subject.findWinner(places).should.eql(true);
-			subject.should.have.property('winner', "z");
+			subject.should.have.property('winner', "o");
 		});
 	});
 });

@@ -11,8 +11,8 @@ suite("Random: ", function() {
 
 		test("should return a random int within the specified range", function() {
 			var result = subject.randomInt(0,100);
-			
-			result.should.be.above(0);
+
+			result.should.be.above(-1);
 			result.should.be.below(100);
 		});
 	});
