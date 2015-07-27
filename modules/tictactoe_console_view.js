@@ -14,8 +14,23 @@ TicTacToeConsoleView.prototype.welcome = function(players, board) {
 };
 
 TicTacToeConsoleView.prototype.describe = function(player, freePlacesCount, totalTurnsTaken) {
-
+	if (this.overHalfWay(freePlacesCount, totalTurnsTaken)) {
+		this.console.log(totalTurnsTaken + " moves made, but it's not quite in the bag yet!");
+	}
+	if (!this.isLastTurn(freePlacesCount)) {
+		this.console.log(player.getName() + "\'s turn, with " + freePlacesCount + " available moves we should see some exciting play!");
+	}
+	else {
+		this.console.log(player.getName() + "\'s turn, with " + freePlacesCount + " available move anything could happen!");
+	}
 };
 
+TicTacToeConsoleView.prototype.overHalfWay = function(freePlacesCount, totalTurnsTaken) {
+	return freePlacesCount < totalTurnsTaken;
+};
+
+TicTacToeConsoleView.prototype.isLastTurn = function(freePlacesCount) {
+	return freePlacesCount === 1;
+};
 // export the class
 module.exports = TicTacToeConsoleView;
