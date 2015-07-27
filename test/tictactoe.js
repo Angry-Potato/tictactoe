@@ -48,6 +48,7 @@ suite("TicTacToe: ", function() {
 		var boardDrawStub = null;
 		var welcomeMessageStub = null;
 		var describeMessageStub = null;
+		var finishMessageStub = null;
 
 		setup(function() {
 			subject = new TicTacToe();
@@ -58,6 +59,7 @@ suite("TicTacToe: ", function() {
 			boardDrawStub = sinon.stub(subject.board, 'draw');
 			welcomeMessageStub = sinon.stub(subject.view, 'welcome');
 			describeMessageStub = sinon.stub(subject.view, 'describe');
+			finishMessageStub = sinon.stub(subject.view, 'finish');
 		});
 
 		test("should play until the board has no free places", function() {
@@ -108,6 +110,7 @@ suite("TicTacToe: ", function() {
 		var describeMessageStub = null;
 		var player1TakeTurnSpy = null;
 		var player2TakeTurnSpy = null;
+		var finishMessageStub = null;
 
 		setup(function() {
 			subject = new TicTacToe();
@@ -116,12 +119,19 @@ suite("TicTacToe: ", function() {
 			describeMessageStub = sinon.stub(subject.view, 'describe');
 			player1TakeTurnSpy = sinon.spy(subject.players[0], 'takeTurn');
 			player2TakeTurnSpy = sinon.spy(subject.players[1], 'takeTurn');
+			finishMessageStub = sinon.stub(subject.view, 'finish');
 		});
 
 		test("should output the welcome message once", function() {
 			subject.play();
 
 			welcomeMessageStub.callCount.should.eql(1);
+		});
+
+		test("should output the finish message once", function() {
+			subject.play();
+
+			finishMessageStub.callCount.should.eql(1);
 		});
 
 		test("should describe the state of play once before each turn", function() {
@@ -149,6 +159,54 @@ suite("TicTacToe: ", function() {
 
 			player1TakeTurnSpy.callCount.should.eql(5);
 			player2TakeTurnSpy.callCount.should.eql(4);
+		});
+	});
+
+	suite("In an entire playthrough with a winner", function() {
+		var subject = null;
+		var boardDrawStub = null;
+		var welcomeMessageStub = null;
+		var describeMessageStub = null;
+		var finishMessageStub = null;
+
+		setup(function() {
+			subject = new TicTacToe();
+			sinon.stub(subject.board, 'hasFreePlaces').returns(true);
+			var hasWinnerStub = sinon.stub(subject, 'hasWinner');
+			hasWinnerStub.onCall(0).returns(false);
+			hasWinnerStub.onCall(1).returns(false);
+			hasWinnerStub.onCall(2).returns(false);
+			hasWinnerStub.onCall(3).returns(false);
+			hasWinnerStub.onCall(4).returns(false);
+			hasWinnerStub.onCall(5).returns(false);
+			hasWinnerStub.onCall(6).returns(false);
+			hasWinnerStub.onCall(7).returns(false);
+			hasWinnerStub.onCall(8).returns(false);
+			hasWinnerStub.onCall(9).returns(true);
+			boardDrawStub = sinon.stub(subject.board, 'draw');
+			welcomeMessageStub = sinon.stub(subject.view, 'welcome');
+			describeMessageStub = sinon.stub(subject.view, 'describe');
+			finishMessageStub = sinon.stub(subject.view, 'finish');
+		});
+
+		test("should play until the board has a winner", function() {
+			subject.should.have.property('turn', 0);
+
+			subject.play();
+
+			subject.should.have.property('turn', 9);
+		});
+
+		test("should output the welcome message once", function() {
+			subject.play();
+
+			welcomeMessageStub.callCount.should.eql(1);
+		});
+
+		test("should output the finish message once", function() {
+			subject.play();
+
+			finishMessageStub.callCount.should.eql(1);
 		});
 	});
 });

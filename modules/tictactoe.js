@@ -23,6 +23,7 @@ TicTacToe.prototype.play = function() {
 		this.drawBoard();
 		this.incrementTurn();
 	}
+	this.finish();
 };
 
 TicTacToe.prototype.incrementTurn = function() {
@@ -55,6 +56,10 @@ TicTacToe.prototype.describeStateOfPlay = function() {
 
 TicTacToe.prototype.hasWinner = function() {
 	return false;
+};
+
+TicTacToe.prototype.finish = function() {
+	this.view.finish();
 };
 
 // export the class
