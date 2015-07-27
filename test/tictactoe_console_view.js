@@ -57,5 +57,25 @@ suite("TicTacToeConsoleView: ", function() {
 
 			consoleLogStub.getCall(0).args[0].should.eql("Player 1\'s turn, with 4 available moves we should see some exciting play!");
 		});
+
+		test("should output finish message to console", function() {
+			subject.finish();
+
+			consoleLogStub.callCount.should.be.above(0);
+		});
+
+		test("should describe final game state after a long game in finish message", function() {
+			subject.finish(new Player("x", "Player 1"), new Player("o", "Player 2"), 1, 8);
+
+			consoleLogStub.getCall(0).args[0].should.eql("After a gruelling 8 moves, Player 1 is left standing victorious!");
+			consoleLogStub.getCall(1).args[0].should.eql("Better luck next time, Player 2.");
+		});
+
+		test("should describe final game state after a short game in finish message", function() {
+			subject.finish(new Player("x", "Player 2"), new Player("o", "Player 1"), 6, 3);
+
+			consoleLogStub.getCall(0).args[0].should.eql("3 moves is all Player 2 needed to secure a decisive victory over Player 1!");
+			consoleLogStub.getCall(1).args[0].should.eql("Try hitting that random function a bit harder next time, Player 1.");
+		});
 	});
 });

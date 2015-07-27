@@ -33,8 +33,8 @@ TicTacToeConsoleView.prototype.isLastTurn = function(freePlacesCount) {
 	return freePlacesCount === 1;
 };
 
-TicTacToeConsoleView.prototype.finish = function() {
-	
+TicTacToeConsoleView.prototype.finish = function(winner, loser, freePlacesCount, totalTurnsTaken) {
+
 };
 // export the class
 module.exports = TicTacToeConsoleView;
