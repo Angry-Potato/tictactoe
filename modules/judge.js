@@ -13,6 +13,11 @@ Judge.prototype.getWinner = function() {
 
 Judge.prototype.findWinner = function(places) {
 	var sqRoot = Math.sqrt(places.length);
+	var playerData = this.gatherPlayerDataFromTheBoard(places, sqRoot);
+	return this.examinePlayerDataForWinner(playerData, sqRoot);
+};
+
+Judge.prototype.gatherPlayerDataFromTheBoard = function(places, sqRoot) {
 	var playerData = [];
 	for (var i = 0; i < places.length; i++) {
 		if (places[i].isEmpty()) {
@@ -23,16 +28,19 @@ Judge.prototype.findWinner = function(places) {
 		}
 
 		var data = this.getPlayerData(playerData, places[i].getValue());
-		if (places[i].getX() === places[i].getY()) {
+		if (this.isOnTheDownwardDiagonalLine(places[i].getX(), places[i].getY())) {
 			data.incrementDownwardDiagonalCount();
 		}
-		if ((places[i].getX() + places[i].getY()) === (sqRoot - 1)) {
+		if (this.isOnTheUpwardDiagonalLine(places[i].getX(), places[i].getY(), sqRoot)) {
 			data.incrementUpwardDiagonalCount();
 		}
 		data.incrementCountForColumn((places[i].getX()));
 		data.incrementCountForRow((places[i].getY()));
 	}
+	return playerData;
+};
 
+Judge.prototype.examinePlayerDataForWinner = function(playerData, sqRoot) {
 	for (var j = 0; j < playerData.length; j++) {
 		if (this.hasDiagonalWin(playerData[j], sqRoot) ||
 			this.hasStraightLineWin(playerData[j].getColumnCounts(), sqRoot) ||
@@ -42,6 +50,14 @@ Judge.prototype.findWinner = function(places) {
 		}
 	}
 	return false;
+};
+
+Judge.prototype.isOnTheDownwardDiagonalLine = function(x, y) {
+	return x === y;
+};
+
+Judge.prototype.isOnTheUpwardDiagonalLine = function(x, y, sqRoot) {
+	return (x + y) === (sqRoot - 1);
 };
 
 Judge.prototype.alreadyContainsDataForPlayer = function(playerData, pieceType) {
@@ -63,7 +79,7 @@ Judge.prototype.getPlayerData = function(playerData, pieceType) {
 };
 
 Judge.prototype.hasDiagonalWin = function(playerData, target) {
-	return playerData.getDownwardDiagonalCount() === target || playerData.getUpwardDiagonalCount() === target;	
+	return playerData.getDownwardDiagonalCount() === target || playerData.getUpwardDiagonalCount() === target;
 };
 
 Judge.prototype.hasStraightLineWin = function(counts, target) {

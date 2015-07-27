@@ -27,7 +27,7 @@ TicTacToe.prototype.play = function(callback) {
 TicTacToe.prototype.gameLoop = function(times) {
 	var hasFreePlaces = true;
 	var hasWinner = false;
-	do{
+	do {
 		hasFreePlaces = this.board.hasFreePlaces();
 		hasWinner = this.hasWinner();
 		if (!hasFreePlaces || hasWinner) {
@@ -41,7 +41,11 @@ TicTacToe.prototype.gameLoop = function(times) {
 		this.makeNextMove();
 		this.drawBoard();
 		this.incrementTurn();
-	} while (times && times-- > 0 && hasFreePlaces && !hasWinner);
+	} while (this.hasGameLoopsRemaining(times, hasFreePlaces, hasWinner));
+};
+
+TicTacToe.prototype.hasGameLoopsRemaining = function(times, hasFreePlaces, hasWinner) {
+	return times && times-- > 0 && hasFreePlaces && !hasWinner;
 };
 
 TicTacToe.prototype.setInterval = function(func, time) {
@@ -100,7 +104,7 @@ TicTacToe.prototype.getLoser = function() {
 
 TicTacToe.prototype.finish = function() {
 	this.view.finish(this.getWinner(), this.getLoser(), this.board.getFreePlaces().length, this.turn);
-	if ( this.finishedCallback ) {
+	if (this.finishedCallback) {
 		this.finishedCallback();
 	}
 };

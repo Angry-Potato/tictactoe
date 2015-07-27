@@ -1,5 +1,6 @@
 /*
  * PlayerData class
+ * Used to gather data regarding a players position on the board
  */
 function PlayerData(pieceType) {
 	this.x = [];

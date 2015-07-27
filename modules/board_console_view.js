@@ -13,6 +13,7 @@ function BoardConsoleView(outputConsole) {
 	this.console = outputConsole ? outputConsole : console;
 }
 
+//renders the given places to the console
 BoardConsoleView.prototype.render = function(places) {
 	this.calculateDimensions(places.length);
 	var placeCount = 0;
@@ -36,6 +37,7 @@ BoardConsoleView.prototype.render = function(places) {
 	}
 };
 
+//calculate and set the required dimensions of the rendered board
 BoardConsoleView.prototype.calculateDimensions = function(placeCount) {
 	var sqRoot = Math.sqrt(placeCount);
 	this.width = this.calculateWidth(placeCount, sqRoot);
@@ -50,10 +52,12 @@ BoardConsoleView.prototype.calculateHeight = function(placeCount, sqRoot) {
 	return (this.verticalPlacePadding*2 + 1)*sqRoot;
 };
 
+//returns true if given column index is to be a vertical line
 BoardConsoleView.prototype.isColumnVerticalLine = function(x) {
 	return x > 0 && (x + 1) % (this.horizontalPlacePadding*2 + 2) === 0;
 };
 
+//returns true if given row index is to be a horizontal line
 BoardConsoleView.prototype.isRowHorizontalLine = function(y) {
 	return y < this.height-1 && (y + 1) % (this.verticalPlacePadding*2 + 1) === 0;
 };
