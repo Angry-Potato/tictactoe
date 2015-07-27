@@ -106,8 +106,10 @@ suite("TicTacToe: ", function() {
 			describeMessageStub.callCount.should.eql(2);
 			describeMessageStub.getCall(0).args[0].should.eql(subject.players[0]);
 			describeMessageStub.getCall(0).args[1].should.eql(9);
+			describeMessageStub.getCall(0).args[2].should.eql(0);
 			describeMessageStub.getCall(1).args[0].should.eql(subject.players[1]);
 			describeMessageStub.getCall(1).args[1].should.eql(8);
+			describeMessageStub.getCall(1).args[2].should.eql(1);
 		});
 	});
 });

@@ -50,7 +50,7 @@ TicTacToe.prototype.welcome = function() {
 };
 
 TicTacToe.prototype.describeStateOfPlay = function() {
-	this.view.describe(this.getPlayerForThisTurn(), this.board.getFreePlaces().length);
+	this.view.describe(this.getPlayerForThisTurn(), this.board.getFreePlaces().length, this.turn);
 };
 
 

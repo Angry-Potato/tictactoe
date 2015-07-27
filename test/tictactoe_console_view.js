@@ -11,7 +11,7 @@ suite("TicTacToeConsoleView: ", function() {
 		setup(function() {
 			subject = new TicTacToeConsoleView();
 		});
-		
+
 		test("should have a console", function() {
 			subject.should.have.property('console');
 		});
@@ -29,14 +29,34 @@ suite("TicTacToeConsoleView: ", function() {
 		teardown(function() {
 			subject.console.log.restore();
 		});
-		
+
 		test("should output welcome message to console", function() {
-			subject.welcome([new Player("x", "Player 1"), new Player("o", "Player 2")],new Board(3, 3));
+			subject.welcome([new Player("x", "Player 1"), new Player("o", "Player 2")], new Board(3, 3));
 
 			consoleLogStub.getCall(0).args[0].should.eql("Welcome to a vicious match of Tic-Tac-Toe to the death!");
 			consoleLogStub.getCall(1).args[0].should.eql("In the eccentric \"x\" corner, we have Player 1");
 			consoleLogStub.getCall(2).args[0].should.eql("In the well-rounded \"o\" corner, we have Player 2");
 			consoleLogStub.getCall(3).args[0].should.eql("Behold their capacious arena, a strategical minefield in 3x3 form:");
+		});
+
+		test("should output describe message to console", function() {
+			subject.describe(new Player("x", "Player 1"), 7, 3);
+
+			consoleLogStub.getCall(0).args[0].should.eql("3 moves made, but it's not quite in the bag yet!");
+			consoleLogStub.getCall(1).args[0].should.eql("Player 1\'s turn, with 7 available moves we should see some exciting play!");
+		});
+
+		test("should output different describe message for last move", function() {
+			subject.describe(new Player("x", "Player 1"), 1, 3);
+
+			consoleLogStub.getCall(0).args[0].should.eql("3 moves made, but it's not quite in the bag yet!");
+			consoleLogStub.getCall(1).args[0].should.eql("Player 1\'s turn, with 1 available move anything could happen!");
+		});
+
+		test("should not output moves made describe message when available moves is more than turns taken", function() {
+			subject.describe(new Player("x", "Player 1"), 4, 0);
+
+			consoleLogStub.getCall(0).args[0].should.eql("Player 1\'s turn, with 4 available move anything could happen!");
 		});
 	});
 });
