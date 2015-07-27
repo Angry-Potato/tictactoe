@@ -17,7 +17,7 @@ function TicTacToe(view) {
 TicTacToe.prototype.play = function() {
 	this.welcome();
 	this.drawBoard();
-	while (this.board.hasFreePlaces()) {
+	while (this.board.hasFreePlaces() && !this.hasWinner()) {
 		this.describeStateOfPlay();
 		this.makeNextMove();
 		this.drawBoard();
@@ -53,6 +53,9 @@ TicTacToe.prototype.describeStateOfPlay = function() {
 	this.view.describe(this.getPlayerForThisTurn(), this.board.getFreePlaces().length, this.turn);
 };
 
+TicTacToe.prototype.hasWinner = function() {
+	return false;
+};
 
 // export the class
 module.exports = TicTacToe;

@@ -88,18 +88,6 @@ suite("TicTacToe: ", function() {
 			player2TakeTurnStub.calledWith(subject.board.getFreePlaces()).should.eql(true);
 		});
 
-		test("should draw the board at the start of the game and after each turn", function() {
-			subject.play();
-
-			boardDrawStub.callCount.should.eql(3);
-		});
-
-		test("should output the welcome message once", function() {
-			subject.play();
-
-			welcomeMessageStub.callCount.should.eql(1);
-		});
-
 		test("should describe the state of play before each turn", function() {
 			subject.play();
 
@@ -110,6 +98,57 @@ suite("TicTacToe: ", function() {
 			describeMessageStub.getCall(1).args[0].should.eql(subject.players[1]);
 			describeMessageStub.getCall(1).args[1].should.eql(8);
 			describeMessageStub.getCall(1).args[2].should.eql(1);
+		});
+	});
+
+	suite("In an entire playthrough with no winner", function() {
+		var subject = null;
+		var boardDrawStub = null;
+		var welcomeMessageStub = null;
+		var describeMessageStub = null;
+		var player1TakeTurnSpy = null;
+		var player2TakeTurnSpy = null;
+
+		setup(function() {
+			subject = new TicTacToe();
+			boardDrawStub = sinon.stub(subject.board, 'draw');
+			welcomeMessageStub = sinon.stub(subject.view, 'welcome');
+			describeMessageStub = sinon.stub(subject.view, 'describe');
+			player1TakeTurnSpy = sinon.spy(subject.players[0], 'takeTurn');
+			player2TakeTurnSpy = sinon.spy(subject.players[1], 'takeTurn');
+		});
+
+		test("should output the welcome message once", function() {
+			subject.play();
+
+			welcomeMessageStub.callCount.should.eql(1);
+		});
+
+		test("should describe the state of play once before each turn", function() {
+			subject.play();
+
+			describeMessageStub.callCount.should.eql(9);
+		});
+
+		test("should draw the board at the start of the game and after each turn", function() {
+			subject.play();
+
+			boardDrawStub.callCount.should.eql(10);
+		});
+
+		test("should play until the board has no free places", function() {
+			subject.should.have.property('turn', 0);
+
+			subject.play();
+
+			subject.should.have.property('turn', 9);
+		});
+
+		test("should ask the players to take all their turns", function() {
+			subject.play();
+
+			player1TakeTurnSpy.callCount.should.eql(5);
+			player2TakeTurnSpy.callCount.should.eql(4);
 		});
 	});
 });
