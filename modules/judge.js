@@ -21,10 +21,12 @@ Judge.prototype.findWinner = function(places) {
 		if (!this.alreadyContainsDataForPlayer(playerData, places[i].getValue())) {
 			playerData.push(new PlayerData(places[i].getValue()));
 		}
+
 		var data = this.getPlayerData(playerData, places[i].getValue());
 		if (places[i].getX() === places[i].getY()) {
 			data.incrementDownwardDiagonalCount();
-		} else if ((places[i].getX() + places[i].getY()) === sqRoot - 1) {
+		}
+		if ((places[i].getX() + places[i].getY()) === (sqRoot - 1)) {
 			data.incrementUpwardDiagonalCount();
 		}
 		data.incrementCountForColumn((places[i].getX()));
@@ -61,8 +63,7 @@ Judge.prototype.getPlayerData = function(playerData, pieceType) {
 };
 
 Judge.prototype.hasDiagonalWin = function(playerData, target) {
-	return playerData.getDownwardDiagonalCount() === target ||
-		playerData.getUpwardDiagonalCount() === target-1;
+	return playerData.getDownwardDiagonalCount() === target || playerData.getUpwardDiagonalCount() === target;	
 };
 
 Judge.prototype.hasStraightLineWin = function(counts, target) {

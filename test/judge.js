@@ -77,11 +77,19 @@ suite("Judge: ", function() {
 			var places = [];
 			for (var y = 0; y < 3; y++) {
 				for (var x = 0; x < 3; x++) {
-					places.push(x + y === 2 ? new Place(x, y, "o") : new Place(x, y, " "));
+					places.push((x + y) === 2 ? new Place(x, y, "o") : new Place(x, y, " "));
 				}
 			}
+
 			subject.findWinner(places).should.eql(true);
 			subject.should.have.property('winner', "o");
+		});
+
+		test("should not find a win where there is none", function() {
+			var places = [new Place(0, 0, "o"), new Place(1, 0, "o"), new Place(2, 0, "x"), new Place(0, 1, "x"), new Place(1, 1, "o"), new Place(2, 1, " "), new Place(0, 2, "x"), new Place(1, 2, " "), new Place(2, 2, "x")];
+
+			subject.findWinner(places).should.eql(false);
+			subject.should.have.property('winner', undefined);
 		});
 	});
 });
