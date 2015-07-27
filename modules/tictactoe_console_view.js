@@ -13,5 +13,9 @@ TicTacToeConsoleView.prototype.welcome = function(players, board) {
 	this.console.log("Behold their capacious arena, a strategical minefield in " + board.getWidth() + "x" + board.getHeight() + " form:");
 };
 
+TicTacToeConsoleView.prototype.describe = function(player, freePlacesCount) {
+
+};
+
 // export the class
 module.exports = TicTacToeConsoleView;

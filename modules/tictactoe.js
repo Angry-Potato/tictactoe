@@ -18,6 +18,7 @@ TicTacToe.prototype.play = function() {
 	this.welcome();
 	this.drawBoard();
 	while (this.board.hasFreePlaces()) {
+		this.describeStateOfPlay();
 		this.makeNextMove();
 		this.drawBoard();
 		this.incrementTurn();
@@ -35,8 +36,7 @@ TicTacToe.prototype.makeNextMove = function() {
 TicTacToe.prototype.getPlayerForThisTurn = function() {
 	if (this.turn % 2 === 0) {
 		return this.players[0];
-	}
-	else {
+	} else {
 		return this.players[1];
 	}
 };
@@ -46,7 +46,11 @@ TicTacToe.prototype.drawBoard = function() {
 };
 
 TicTacToe.prototype.welcome = function() {
-	this.view.welcome(this.players,this.board);
+	this.view.welcome(this.players, this.board);
+};
+
+TicTacToe.prototype.describeStateOfPlay = function() {
+	this.view.describe(this.getPlayerForThisTurn(), this.board.getFreePlaces().length);
 };
 
 

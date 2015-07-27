@@ -47,6 +47,7 @@ suite("TicTacToe: ", function() {
 		var subject = null;
 		var boardDrawStub = null;
 		var welcomeMessageStub = null;
+		var describeMessageStub = null;
 
 		setup(function() {
 			subject = new TicTacToe();
@@ -56,6 +57,7 @@ suite("TicTacToe: ", function() {
 			hasFreePlacesStub.onCall(2).returns(false);
 			boardDrawStub = sinon.stub(subject.board, 'draw');
 			welcomeMessageStub = sinon.stub(subject.view, 'welcome');
+			describeMessageStub = sinon.stub(subject.view, 'describe');
 		});
 
 		test("should play until the board has no free places", function() {
@@ -96,6 +98,16 @@ suite("TicTacToe: ", function() {
 			subject.play();
 
 			welcomeMessageStub.callCount.should.eql(1);
+		});
+
+		test("should describe the state of play before each turn", function() {
+			subject.play();
+
+			describeMessageStub.callCount.should.eql(2);
+			describeMessageStub.getCall(0).args[0].should.eql(subject.players[0]);
+			describeMessageStub.getCall(0).args[1].should.eql(9);
+			describeMessageStub.getCall(1).args[0].should.eql(subject.players[1]);
+			describeMessageStub.getCall(1).args[1].should.eql(8);
 		});
 	});
 });
