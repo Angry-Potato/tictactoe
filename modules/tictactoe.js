@@ -13,10 +13,12 @@ function TicTacToe(view) {
 	this.turn = 0;
 	this.view = view ? view : new TicTacToeConsoleView();
 	this.judge = new Judge();
+	this.finishedCallback = null;
 }
 
 //plays the game
-TicTacToe.prototype.play = function() {
+TicTacToe.prototype.play = function(callback) {
+	this.finishedCallback = callback;
 	this.welcome();
 	this.drawBoard();
 	gameLoopInterval = this.setInterval(this.gameLoop.bind(this), 1000);
@@ -98,6 +100,9 @@ TicTacToe.prototype.getLoser = function() {
 
 TicTacToe.prototype.finish = function() {
 	this.view.finish(this.getWinner(), this.getLoser(), this.board.getFreePlaces().length, this.turn);
+	if ( this.finishedCallback ) {
+		this.finishedCallback();
+	}
 };
 
 // export the class
