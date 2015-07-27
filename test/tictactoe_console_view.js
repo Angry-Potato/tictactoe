@@ -59,7 +59,7 @@ suite("TicTacToeConsoleView: ", function() {
 		});
 
 		test("should output finish message to console", function() {
-			subject.finish();
+			subject.finish(new Player("x", "Player 1"), new Player("o", "Player 2"), 1, 1);
 
 			consoleLogStub.callCount.should.be.above(0);
 		});

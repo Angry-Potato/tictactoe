@@ -34,7 +34,14 @@ TicTacToeConsoleView.prototype.isLastTurn = function(freePlacesCount) {
 };
 
 TicTacToeConsoleView.prototype.finish = function(winner, loser, freePlacesCount, totalTurnsTaken) {
-
+	if (this.overHalfWay(freePlacesCount, totalTurnsTaken)) {
+		this.console.log("After a gruelling " + totalTurnsTaken + " moves, " + winner.getName() + " is left standing victorious!");
+		this.console.log("Better luck next time, " + loser.getName() + ".");
+	}
+	else {
+		this.console.log(totalTurnsTaken + " moves is all " + winner.getName() + " needed to secure a decisive victory over " + loser.getName() + "!");
+		this.console.log("Try hitting that random function a bit harder next time, " + loser.getName() + ".");
+	}
 };
 // export the class
 module.exports = TicTacToeConsoleView;
