@@ -77,5 +77,11 @@ suite("TicTacToeConsoleView: ", function() {
 			consoleLogStub.getCall(0).args[0].should.eql("3 moves is all Player 2 needed to secure a decisive victory over Player 1!");
 			consoleLogStub.getCall(1).args[0].should.eql("Try hitting that random function a bit harder next time, Player 1.");
 		});
+
+		test("should describe final game state if no winner found", function() {
+			subject.finish(null, new Player("o", "Player 1"), 6, 3);
+
+			consoleLogStub.getCall(0).args[0].should.eql("Wow, no winner, cool story guys.");
+		});
 	});
 });

@@ -34,7 +34,10 @@ TicTacToeConsoleView.prototype.isLastTurn = function(freePlacesCount) {
 };
 
 TicTacToeConsoleView.prototype.finish = function(winner, loser, freePlacesCount, totalTurnsTaken) {
-	if (this.overHalfWay(freePlacesCount, totalTurnsTaken)) {
+	if (!winner) {
+		this.console.log("Wow, no winner, cool story guys.");
+	}
+	else if (this.overHalfWay(freePlacesCount, totalTurnsTaken)) {
 		this.console.log("After a gruelling " + totalTurnsTaken + " moves, " + winner.getName() + " is left standing victorious!");
 		this.console.log("Better luck next time, " + loser.getName() + ".");
 	}

@@ -60,8 +60,26 @@ TicTacToe.prototype.hasWinner = function() {
 	return this.judge.findWinner(this.board.getPlaces());
 };
 
+TicTacToe.prototype.getWinner = function() {
+	if (this.judge.getWinner() === this.players[0].getPieceType()) {
+		return this.players[0];
+	} else if (this.judge.getWinner() === this.players[1].getPieceType()) {
+		return this.players[1];
+	}
+	return null;
+};
+
+TicTacToe.prototype.getLoser = function() {
+	if (this.judge.getWinner() === this.players[0].getPieceType()) {
+		return this.players[1];
+	} else if (this.judge.getWinner() === this.players[1].getPieceType()) {
+		return this.players[0];
+	}
+	return null;
+};
+
 TicTacToe.prototype.finish = function() {
-	this.view.finish();
+	this.view.finish(this.getWinner(),this.getLoser(),this.board.getFreePlaces().length, this.turn);
 };
 
 // export the class
