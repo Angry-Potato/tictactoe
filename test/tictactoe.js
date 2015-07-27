@@ -52,6 +52,7 @@ suite("TicTacToe: ", function() {
 
 		setup(function() {
 			subject = new TicTacToe();
+			sinon.stub(subject.judge, 'findWinner').returns(false);
 			var hasFreePlacesStub = sinon.stub(subject.board, 'hasFreePlaces');
 			hasFreePlacesStub.onCall(0).returns(true);
 			hasFreePlacesStub.onCall(1).returns(true);
@@ -114,6 +115,7 @@ suite("TicTacToe: ", function() {
 
 		setup(function() {
 			subject = new TicTacToe();
+			sinon.stub(subject.judge, 'findWinner').returns(false);
 			boardDrawStub = sinon.stub(subject.board, 'draw');
 			welcomeMessageStub = sinon.stub(subject.view, 'welcome');
 			describeMessageStub = sinon.stub(subject.view, 'describe');

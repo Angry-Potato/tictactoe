@@ -7,6 +7,10 @@ function Judge() {
 	this.winner = undefined;
 }
 
+Judge.prototype.getWinner = function() {
+	return this.winner;
+};
+
 Judge.prototype.findWinner = function(places) {
 	var sqRoot = Math.sqrt(places.length);
 	var playerData = [];

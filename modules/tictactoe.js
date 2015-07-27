@@ -1,6 +1,7 @@
 var Board = require('./board.js'),
 	TicTacToeConsoleView = require('./tictactoe_console_view.js'),
-	Player = require('./player.js');
+	Player = require('./player.js'),
+	Judge = require('./judge.js');
 
 /*
  * Tictactoe class
@@ -11,6 +12,7 @@ function TicTacToe(view) {
 	this.board = new Board(3, 3);
 	this.turn = 0;
 	this.view = view ? view : new TicTacToeConsoleView();
+	this.judge = new Judge();
 }
 
 //plays the game
@@ -55,7 +57,7 @@ TicTacToe.prototype.describeStateOfPlay = function() {
 };
 
 TicTacToe.prototype.hasWinner = function() {
-	return false;
+	return this.judge.findWinner(this.board.getPlaces());
 };
 
 TicTacToe.prototype.finish = function() {
