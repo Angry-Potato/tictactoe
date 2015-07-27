@@ -3,6 +3,7 @@ var TicTacToe = require("../modules/tictactoe.js"),
 
 suite("TicTacToe: ", function() {
 
+gameLoopInterval = null;
 	suite("Initial default state", function() {
 		var subject = null;
 
@@ -54,6 +55,7 @@ suite("TicTacToe: ", function() {
 			subject = new TicTacToe();
 			sinon.stub(subject.judge, 'findWinner').returns(false);
 			var hasFreePlacesStub = sinon.stub(subject.board, 'hasFreePlaces');
+			sinon.stub(subject, 'setInterval').callsArgWith(0,3);
 			hasFreePlacesStub.onCall(0).returns(true);
 			hasFreePlacesStub.onCall(1).returns(true);
 			hasFreePlacesStub.onCall(2).returns(false);
@@ -116,6 +118,7 @@ suite("TicTacToe: ", function() {
 		setup(function() {
 			subject = new TicTacToe();
 			sinon.stub(subject.judge, 'findWinner').returns(false);
+			sinon.stub(subject, 'setInterval').callsArgWith(0,9);
 			boardDrawStub = sinon.stub(subject.board, 'draw');
 			welcomeMessageStub = sinon.stub(subject.view, 'welcome');
 			describeMessageStub = sinon.stub(subject.view, 'describe');
@@ -174,6 +177,7 @@ suite("TicTacToe: ", function() {
 		setup(function() {
 			subject = new TicTacToe();
 			sinon.stub(subject.board, 'hasFreePlaces').returns(true);
+			sinon.stub(subject, 'setInterval').callsArgWith(0,9);
 			var hasWinnerStub = sinon.stub(subject, 'hasWinner');
 			hasWinnerStub.onCall(0).returns(false);
 			hasWinnerStub.onCall(1).returns(false);

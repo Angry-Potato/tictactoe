@@ -62,11 +62,22 @@ suite("Judge: ", function() {
 			subject.should.have.property('winner', "o");
 		});
 
-		test("should find a diagonal line winner in a given array of board places", function() {
+		test("should find a downward diagonal line winner in a given array of board places", function() {
 			var places = [];
 			for (var y = 0; y < 3; y++) {
 				for (var x = 0; x < 3; x++) {
 					places.push(x === y ? new Place(x, y, "o") : new Place(x, y, " "));
+				}
+			}
+			subject.findWinner(places).should.eql(true);
+			subject.should.have.property('winner', "o");
+		});
+
+		test("should find an upward diagonal line winner in a given array of board places", function() {
+			var places = [];
+			for (var y = 0; y < 3; y++) {
+				for (var x = 0; x < 3; x++) {
+					places.push(x + y === 2 ? new Place(x, y, "o") : new Place(x, y, " "));
 				}
 			}
 			subject.findWinner(places).should.eql(true);

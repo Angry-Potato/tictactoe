@@ -19,13 +19,31 @@ function TicTacToe(view) {
 TicTacToe.prototype.play = function() {
 	this.welcome();
 	this.drawBoard();
-	while (this.board.hasFreePlaces() && !this.hasWinner()) {
+	gameLoopInterval = this.setInterval(this.gameLoop.bind(this), 1000);
+};
+
+TicTacToe.prototype.gameLoop = function(times) {
+	var hasFreePlaces = true;
+	var hasWinner = false;
+	do{
+		hasFreePlaces = this.board.hasFreePlaces();
+		hasWinner = this.hasWinner();
+		if (!hasFreePlaces || hasWinner) {
+			this.finish();
+			if (gameLoopInterval) {
+				clearInterval(gameLoopInterval);
+			}
+			return;
+		}
 		this.describeStateOfPlay();
 		this.makeNextMove();
 		this.drawBoard();
 		this.incrementTurn();
-	}
-	this.finish();
+	} while (times && times-- > 0 && hasFreePlaces && !hasWinner);
+};
+
+TicTacToe.prototype.setInterval = function(func, time) {
+	return setInterval(func, time);
 };
 
 TicTacToe.prototype.incrementTurn = function() {
@@ -79,7 +97,7 @@ TicTacToe.prototype.getLoser = function() {
 };
 
 TicTacToe.prototype.finish = function() {
-	this.view.finish(this.getWinner(),this.getLoser(),this.board.getFreePlaces().length, this.turn);
+	this.view.finish(this.getWinner(), this.getLoser(), this.board.getFreePlaces().length, this.turn);
 };
 
 // export the class

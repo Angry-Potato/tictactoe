@@ -62,7 +62,7 @@ Judge.prototype.getPlayerData = function(playerData, pieceType) {
 
 Judge.prototype.hasDiagonalWin = function(playerData, target) {
 	return playerData.getDownwardDiagonalCount() === target ||
-		playerData.getUpwardDiagonalCount() === target;
+		playerData.getUpwardDiagonalCount() === target-1;
 };
 
 Judge.prototype.hasStraightLineWin = function(counts, target) {
