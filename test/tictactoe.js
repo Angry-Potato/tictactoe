@@ -21,6 +21,10 @@ suite("TicTacToe: ", function() {
 		test("should have a turn counter", function() {
 			subject.should.have.property('turn', 0);
 		});
+
+		test("should have a view", function() {
+			subject.should.have.property('view');
+		});
 	});
 
 	suite("After construction", function() {
@@ -32,7 +36,7 @@ suite("TicTacToe: ", function() {
 
 		test("should be able to increment the turn", function() {
 			subject.should.have.property('turn', 0);
-			
+
 			subject.incrementTurn();
 
 			subject.should.have.property('turn', 1);
@@ -42,6 +46,7 @@ suite("TicTacToe: ", function() {
 	suite("During two turns of game play", function() {
 		var subject = null;
 		var boardDrawStub = null;
+		var welcomeMessageStub = null;
 
 		setup(function() {
 			subject = new TicTacToe();
@@ -50,6 +55,7 @@ suite("TicTacToe: ", function() {
 			hasFreePlacesStub.onCall(1).returns(true);
 			hasFreePlacesStub.onCall(2).returns(false);
 			boardDrawStub = sinon.stub(subject.board, 'draw');
+			welcomeMessageStub = sinon.stub(subject.view, 'welcome');
 		});
 
 		test("should play until the board has no free places", function() {
@@ -84,6 +90,12 @@ suite("TicTacToe: ", function() {
 			subject.play();
 
 			boardDrawStub.callCount.should.eql(3);
+		});
+
+		test("should output the welcome message once", function() {
+			subject.play();
+
+			welcomeMessageStub.callCount.should.eql(1);
 		});
 	});
 });
