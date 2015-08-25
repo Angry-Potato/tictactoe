@@ -22,6 +22,7 @@ node modules/main.js
 # Known issue(s)
 Running on windows is sometimes problematic. If you encounter errors when running npm test or otherwise, try replacing the contents of package.json with the following:
 
+```javascript
 {
   "name": "tddtictactoe",
   "version": "0.0.1",
@@ -60,3 +61,5 @@ Running on windows is sometimes problematic. If you encounter errors when runnin
     "sinon": "^1.15.4"
   }
 }
+
+```
